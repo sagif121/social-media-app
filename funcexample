@@ -1,0 +1,10 @@
+const Home = () => {
+  
+  return (
+    <div className="homePage">
+      {Posts.map((postDetails) => {
+        return <Post postDetails={postDetails} />;
+      })}
+    </div>
+  );
+};
