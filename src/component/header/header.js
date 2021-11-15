@@ -17,15 +17,18 @@ const Header = ({ user }) => {
   let search = (searchValue) => {};
 
   async function logout() {
-    return await http.post("http://localhost:5000/users/logout");
+    // return await http.post("http://localhost:5000/users/logout");
+    localStorage.removeItem("userDetails");
+    localStorage.removeItem("token");
   }
 
-  let [userDetails, setUserDetails] = useState("");
+  let [userDetails, setUserDetails] = useState(false);
 
   const [user1, setUser] = useState({});
   let userOnline;
   useEffect(() => {
     setUserDetails(JSON.parse(localStorage.getItem("userDetails")));
+    console.log("/////////////////////", userDetails);
     // setUserDetails("ssdass");
     console.log("userdetails in useEffect", userDetails);
     console.log("userdetails in storage", localStorage.getItem("userDetails"));
@@ -108,7 +111,7 @@ const Header = ({ user }) => {
                 href="/login/login"
               >
                 <BiLogOutCircle></BiLogOutCircle>
-                {/* {"Logout" + " " + " " + userDetails.firstName} */}
+                {userDetails && "Logout" + " " + " " + userDetails.firstName}
               </a>
             ) : (
               <a class="navbar-brand" aria-current="page" href="/login/login">

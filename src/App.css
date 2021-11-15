@@ -44,7 +44,9 @@
 /* .head {
   color: rgb(128, 0, 255);
 } */
-
+.checkButton {
+  background-color: red;
+}
 .fotter {
   color: rgb(25, 27, 27);
   background-color: rgb(95, 187, 42);
@@ -140,7 +142,7 @@ textarea.edit {
 
 .commentbutton {
   /* padding-right: 80%; */
-  margin-right: 70%;
+  width: 100%;
 }
 
 .inputcomment {
@@ -191,7 +193,9 @@ textarea.edit {
 }
 
 .userdetails {
-  margin-left: 350px;
+  margin-right: -1220%;
+  font-weight: bold;
+  font-size: larger;
 }
 .username {
   text-align: right;
@@ -310,10 +314,11 @@ textarea.edit {
 .btnedit {
   background-color: white;
   color: #1877f2;
-  width: 50px;
-  margin-right: 61%;
-  margin-top: 4%;
+  /* width: 5%; */
   position: absolute;
+  margin-right: 80%;
+  margin-top: 4%;
+
   z-index: 2;
   border-radius: 5px;
   border: 1px solid blue;

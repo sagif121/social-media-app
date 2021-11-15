@@ -7,8 +7,15 @@ import http from "../../services/http";
 const NewComments = ({ idPost }) => {
   // let [newCommentValue, setNewCommentValue] = useState("");
   const [newCommentValue, setNewCommentValue] = useState({
-    comments: { commentContent: "" },
+    comments: [{ commentContent: "" }],
   });
+
+  const getInputValue = (event) => {
+    // show the user input value to console
+    const userValue = event.target.value;
+
+    console.log(userValue);
+  };
 
   let handlePostComment = async () => {
     console.log("id", idPost);
@@ -28,19 +35,28 @@ const NewComments = ({ idPost }) => {
     // </div>
 
     <span>
-      <span className="commentbutton">
-        <button
-          type="button"
-          class="btn btn-outline-primary "
-          onClick={handlePostComment}
-        >
-          תגובה
-        </button>
-      </span>
+      {/* {newCommentValue.comments[0].commentContent.length > 0 && (
+        <span className="commentbutton">
+          <button
+            type="button"
+            class="btn btn-outline-primary "
+            onClick={handlePostComment}
+          >
+            תגובה
+          </button>
+        </span>
+      )} */}
       <div>
         <input
           className="inputcomment"
           placeholder="כתוב תגובה"
+          // onKeyPress={(e) => {
+          //   if (e.target.key === 13) {
+          //     setNewCommentValue({
+          //       comments: [{ commentContent: e.target.value }],
+          //     });
+          //   }
+          // }}
           onChange={(e) => {
             setNewCommentValue({
               comments: [{ commentContent: e.target.value }],
@@ -49,6 +65,19 @@ const NewComments = ({ idPost }) => {
           value={newCommentValue.commentContent}
         ></input>
       </div>
+
+      {newCommentValue.comments[0].commentContent.length > 0 && (
+        <span>
+          <button
+            type="button"
+            className="commentbutton"
+            class="btn btn-outline-primary commentbutton "
+            onClick={handlePostComment}
+          >
+            פרסם
+          </button>
+        </span>
+      )}
     </span>
   );
 };

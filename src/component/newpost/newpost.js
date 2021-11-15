@@ -45,6 +45,7 @@ const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
       console.log(userOnline);
       return setUser(userOnline.data);
     }
+
     console.log(setUser);
     getOnlineUser();
   }, []);
@@ -62,9 +63,9 @@ const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
           </button>
         </Link>
         <h1>יצירת פוסט</h1>
-        <h5 className="userdetails">
+        <div className="userdetails">
           {userDetails.firstName + " " + userDetails.lastName}
-        </h5>
+        </div>
       </div>
       <hr className="hr" />
       <div>{/* <h6 className="username">{userName} </h6> */}</div>
@@ -76,7 +77,6 @@ const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
           onChange={(e) => {
             newPostObject.content = e.target.value;
           }}
-          // value={newComments}
         />
         {/* {newArray.length < 0 &&
           newArray.map((commentsDetails) => {
@@ -91,10 +91,10 @@ const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
           className="btn btn-outline-primary buttonnewpost "
           type="button"
           onClick={saveNewPost}
-          // className="buttonnewpost"
         >
           פרסם
         </button>
+        {/* )} */}
       </div>
     </div>
   );

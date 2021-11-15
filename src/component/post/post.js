@@ -24,8 +24,12 @@ const Post = ({ postDetails }) => {
   let [newCommentsArray, setNewCommentsArray] = useState([]);
   let commentLoaded = false;
   let x = ["s", "s", "s", "s", "s", "s", "s", "s"];
+
   let handleLike = async () => {
     let userIdForLike = JSON.parse(localStorage.getItem("userDetails"))._id;
+
+    // var dateCreated = new Date("YYYY-MM-DD hh:mm:ss a");
+
     console.log("userIdForLike", userIdForLike);
     fetch("http://localhost:5000/posts/newLike/" + _id, {
       method: "PUT",
@@ -74,21 +78,33 @@ const Post = ({ postDetails }) => {
 
   return (
     <div dir="rtl">
-      <div>
+      {/* <span>
         {user?._id === userId ? (
           <Link to={"/edit/" + _id}>
-            <button className="btnedit" type="button">
+            <button className="btn btn-outline-primary btnedit" type="button">
               edit
             </button>
           </Link>
         ) : null}
-      </div>
+      </span> */}
 
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <span></span>
 
         <div class="col">
           <div className="card h-80">
+            <div>
+              {user?._id === userId ? (
+                <Link to={"/edit/" + _id}>
+                  <button
+                    className="btn btn-outline-primary btnedit"
+                    type="button"
+                  >
+                    edit
+                  </button>
+                </Link>
+              ) : null}
+            </div>
             <br />
 
             <div class="card-body">
@@ -121,6 +137,7 @@ const Post = ({ postDetails }) => {
                 </div>
               )}
               <button
+                disabled={likes.some((like) => postDetails.likedBy === userId)}
                 type="button"
                 class="btn btn-outline-primary "
                 onClick={handleLike}

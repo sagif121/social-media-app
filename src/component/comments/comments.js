@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import "../../App.css";
 
-const Comments = ({ commentsDetails, firstNames }) => {
+const Comments = ({ commentsDetails }) => {
   let { commentContent } = commentsDetails;
   // let { firstName } = firstNames;
   return (

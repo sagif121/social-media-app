@@ -98,14 +98,14 @@ const Edit = () => {
                   type="button"
                   class="btn btn-outline-primary "
                 >
-                  edit
+                  פרסם
                 </button>
                 <button
                   onClick={() => handlDeelComment(postId)}
                   type="button"
                   class="btn btn-outline-primary "
                 >
-                  delete
+                  מחק
                 </button>
               </div>
             </div>

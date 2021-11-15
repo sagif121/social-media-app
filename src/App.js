@@ -19,17 +19,23 @@ import AppMessage from "./component/chat/AppMessage";
 import CreatMassage from "./component/chat/CreateMessage";
 import http from "./services/http";
 import AppCamera from "./component/camera/Appcamera";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 const App = () => {
   const [user, setUser] = useState({});
   useEffect(() => {
-    async function getOnlineUser() {
-      let userOnline = await http.get("http://localhost:5000/users");
-      console.log("userDetails", userOnline.data);
-      localStorage.setItem("userDetails", JSON.stringify(userOnline.data));
-      return setUser(userOnline.data);
-    }
+    let userDetails = localStorage.getItem("userDetails");
+    setUser(userDetails);
+    // async function getOnlineUser() {
+    //   let userOnline = await http.get("http://localhost:5000/users");
+    //   console.log("userDetails", userOnline.data);
+    //   localStorage.setItem("userDetails", JSON.stringify(userOnline.data));
+    //   return setUser(userOnline.data);
+    // }
 
-    getOnlineUser();
+    // getOnlineUser();
   }, []);
 
   return (
@@ -42,6 +48,7 @@ const App = () => {
 
         {user ? null : (
           <>
+            <ToastContainer autoClose={false} />
             <Route path="/login/login" component={Login}></Route>
             <Route path="/login/signup" component={Signup}></Route>
           </>

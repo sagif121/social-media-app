@@ -45,10 +45,13 @@
   bottom: 0;
 }
 .messagebutton:hover #slide {
-  left: 0;
+  left: 5;
 }
 .messagebutton:hover span {
   color: black;
+  background-color: whitesmoke;
+
+  margin-bottom: 12px;
 }
 
 .bodymessageOther {
