@@ -25,7 +25,7 @@ const Post = ({ postDetails }) => {
   let commentLoaded = false;
   let x = ["s", "s", "s", "s", "s", "s", "s", "s"];
   var currentDate = new Date(dateCreated);
-  let y = new Date().toString();
+  let y = new Date(parseInt(dateCreated)).toString();
   let dateFinal = y.slice(4, 21);
 
   let handleLike = async () => {

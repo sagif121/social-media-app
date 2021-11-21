@@ -6,18 +6,20 @@ import About from "../about/about";
 import http from "../../services/http";
 const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
   let [userDetails, setUserDetails] = useState("");
-
-  let newPostObject = {
+  let [newPostObject, setNewPostObject] = useState({
     content: "",
     dateCreated: "",
     dateUpdated: "",
     image: "",
-    createdBy: "",
-    comments: [],
-    likes: [],
-  };
-
+    createdBy: userDetails ? userDetails._id : "",
+  });
   let saveNewPost = async () => {
+    setNewPostObject({
+      ...newPostObject,
+      dateCreated: Date.now(),
+      dateUpdated: Date.now(),
+      createdBy: userDetails._id,
+    });
     const newPost = await http
       .post("http://localhost:5000/posts/newPost", newPostObject)
       .then((response) => {
@@ -66,20 +68,22 @@ const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
           className="thepostinput"
           placeholder={"מה אתה חושב , " + userDetails.firstName + " ?"}
           onChange={(e) => {
-            newPostObject.content = e.target.value;
+            setNewPostObject({ ...newPostObject, content: e.target.value });
           }}
           value={newPostObject.content}
         />
       </form>
       <div className="addtopost"></div>
       <div>
-        <button
-          className="btn btn-outline-primary buttonnewpost "
-          type="button"
-          onClick={saveNewPost}
-        >
-          פרסם
-        </button>
+        {newPostObject.content.length > 1 && (
+          <button
+            className="btn btn-outline-primary buttonnewpost "
+            type="button"
+            onClick={saveNewPost}
+          >
+            פרסם
+          </button>
+        )}
       </div>
     </div>
   );
