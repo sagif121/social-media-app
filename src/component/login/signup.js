@@ -28,7 +28,8 @@ const Signup = () => {
       setUserValidatedState(true);
       userValidated = true;
     }
-    console.log("function to server");
+    console.log("function to serverbbb");
+    console.log("function to serverbbb");
 
     if (userValidated) {
       console.log("after validate");
