@@ -30,6 +30,7 @@ const Signup = () => {
     }
     console.log("function to serverbbb");
     console.log("function to serverbbb");
+    console.log("function to serverbbb");
 
     if (userValidated) {
       console.log("after validate");
