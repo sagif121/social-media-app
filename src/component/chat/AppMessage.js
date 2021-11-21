@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import http from "../../services/http";
-import AppCamera from "../camera/Appcamera";
+
 import { Link } from "react-router-dom";
 import "../chat/chat.css";
 
 const socket = io("http://localhost:5000");
-// const usersName = "user " + parseInt(Math.random() * 10);
 
-// const usersName = { firstName };
 function AppMessage() {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
@@ -16,7 +14,6 @@ function AppMessage() {
   useEffect(() => {
     socket.on("message", (payload) => {
       setChat([...chat, payload]);
-      console.log("payload", payload);
     });
   });
 
@@ -24,18 +21,16 @@ function AppMessage() {
   useEffect(() => {
     async function getUserName() {
       let userName = await http.get("http://localhost:5000/users");
-      console.log(userName);
+
       return setUser(userName.data.firstName);
     }
 
     getUserName();
   }, []);
 
-  console.log(firstName);
-
   const sendMessage = (e) => {
     e.preventDefault();
-    console.log(message);
+
     socket.emit("message", {
       firstName,
       message,
@@ -53,7 +48,6 @@ function AppMessage() {
       <div>
         <h1> {"hello   " + firstName} </h1>
         {chat.map((payload, index) => {
-          console.log("payload in map", payload);
           return (
             <div
               className={
@@ -86,8 +80,6 @@ function AppMessage() {
             <span>Send</span>
           </button>
         </form>
-
-        {/* <AppCamera></AppCamera> */}
       </div>
     </div>
   );

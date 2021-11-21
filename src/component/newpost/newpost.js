@@ -5,10 +5,6 @@ import CommentsArray from "../../example/commentsArray";
 import About from "../about/about";
 import http from "../../services/http";
 const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
-  // const { userName, comment } = postDetails;
-  // let userName, comment;
-  // let [localArray, setLocalArray] = useState(commentsArray);
-  // const [newComments, setnewComments] = useState("");
   let [userDetails, setUserDetails] = useState("");
 
   let newPostObject = {
@@ -37,16 +33,12 @@ const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
   let userOnline;
   useEffect(() => {
     setUserDetails(JSON.parse(localStorage.getItem("userDetails")));
-    // setUserDetails("ssdass");
-    console.log("userdetails in useEffect", userDetails);
-    console.log("userdetails in storage", localStorage.getItem("userDetails"));
+
     async function getOnlineUser() {
       userOnline = await http.get("http://localhost:5000/users");
-      console.log(userOnline);
       return setUser(userOnline.data);
     }
 
-    console.log(setUser);
     getOnlineUser();
   }, []);
 
@@ -68,8 +60,7 @@ const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
         </div>
       </div>
       <hr className="hr" />
-      <div>{/* <h6 className="username">{userName} </h6> */}</div>
-      {/* <div> {newComments} </div> */}
+
       <form>
         <textarea
           className="thepostinput"
@@ -77,15 +68,10 @@ const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
           onChange={(e) => {
             newPostObject.content = e.target.value;
           }}
+          value={newPostObject.content}
         />
-        {/* {newArray.length < 0 &&
-          newArray.map((commentsDetails) => {
-            return <About commentsDetails={commentsDetails} />;
-          })} */}
       </form>
-      <div className="addtopost">
-        {/* <button className="bi bi-image-fill buttonnaddtopost "></button> */}
-      </div>
+      <div className="addtopost"></div>
       <div>
         <button
           className="btn btn-outline-primary buttonnewpost "
@@ -94,7 +80,6 @@ const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
         >
           פרסם
         </button>
-        {/* )} */}
       </div>
     </div>
   );

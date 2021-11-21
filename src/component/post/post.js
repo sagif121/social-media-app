@@ -24,13 +24,13 @@ const Post = ({ postDetails }) => {
   let [newCommentsArray, setNewCommentsArray] = useState([]);
   let commentLoaded = false;
   let x = ["s", "s", "s", "s", "s", "s", "s", "s"];
+  var currentDate = new Date(dateCreated);
+  let y = new Date().toString();
+  let dateFinal = y.slice(4, 21);
 
   let handleLike = async () => {
     let userIdForLike = JSON.parse(localStorage.getItem("userDetails"))._id;
 
-    // var dateCreated = new Date("YYYY-MM-DD hh:mm:ss a");
-
-    console.log("userIdForLike", userIdForLike);
     fetch("http://localhost:5000/posts/newLike/" + _id, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -38,9 +38,7 @@ const Post = ({ postDetails }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("data message", data.message);
         if (data.message === "Already liked") {
-          console.log("already liked from server");
         } else if (data.message === "like saved") {
           setLocalLikes([...localLikes, { likesBy: userIdForLike }]);
         }
@@ -49,45 +47,22 @@ const Post = ({ postDetails }) => {
   useState(() => {
     setNewCommentsArray(comments);
   }, []);
-  console.log("xxxx", comments);
+
   const [user, setUser] = useState({});
   useEffect(() => {
     async function getOnlineUser() {
       let userOnline = await http.get("http://localhost:5000/users");
-      // console.log(userOnline);
+
       return setUser(userOnline.data);
     }
 
     getOnlineUser();
   }, []);
-  // console.log(user);
+
   let [localLikes, setLocalLikes] = useState(likes);
-
-  // const [firstName, setUser1] = useState({});
-  // useEffect(() => {
-  //   async function getUserName() {
-  //     let userName = await http.get("http://localhost:5000/users");
-  //     console.log(userName);
-
-  //     console.log(setUser1);
-  //     return setUser1(userName.data.firstName);
-  //   }
-
-  //   getUserName();
-  // }, []);
 
   return (
     <div dir="rtl">
-      {/* <span>
-        {user?._id === userId ? (
-          <Link to={"/edit/" + _id}>
-            <button className="btn btn-outline-primary btnedit" type="button">
-              edit
-            </button>
-          </Link>
-        ) : null}
-      </span> */}
-
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <span></span>
 
@@ -110,7 +85,7 @@ const Post = ({ postDetails }) => {
             <div class="card-body">
               <div className="cardbody">
                 <h5 class="card-title"> {createdBy} </h5>
-                <small class="text-muted">{dateCreated}</small>
+                <small class="text-muted">{dateFinal}</small>
                 <p></p>
                 <p className="postcontent" class="card-text">
                   {content}
@@ -120,12 +95,7 @@ const Post = ({ postDetails }) => {
               <div className="comments">
                 {comments.length > 0 &&
                   comments.map((comment) => {
-                    return (
-                      <Comments
-                        commentsDetails={comment}
-                        // firstNames={firstName}
-                      />
-                    );
+                    return <Comments commentsDetails={comment} />;
                   })}
               </div>
             </div>

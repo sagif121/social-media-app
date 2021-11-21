@@ -1,18 +1,16 @@
 import React, { Component, useState, useEffect } from "react";
 import { useParams, Redirect, useHistory } from "react-router-dom";
 
-import { NavLink } from "react-router-dom";
 import "../../App.css";
-import Posts from "../../example/posts";
+
 import http from "../../services/http";
-import Post from "../post/post";
+
 const Edit = () => {
   let history = useHistory();
   const [postDetails, setPostDetails] = useState("empty");
   let { createdBy, content, dateCreated, image, likes, _id, comments } =
     postDetails;
   let { postId } = useParams();
-  console.log("id roi", postId);
 
   const [deletePost, setdelPost] = useState(_id);
 
@@ -26,11 +24,8 @@ const Edit = () => {
     getOnlineUser();
   }, []);
 
-  console.log(user);
-
   useEffect(() => {
     async function dataPosta() {
-      console.log("Fetching");
       let data = await http.get("http://localhost:5000/posts/" + postId);
 
       return setPostDetails(data.data[0]);
@@ -54,10 +49,8 @@ const Edit = () => {
     fetch("http://localhost:5000/posts/" + testId, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      // body: JSON.stringify(deletePost),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    }).then((res) => res.json());
+
     window.location = "/";
   };
 
@@ -90,7 +83,6 @@ const Edit = () => {
                     }}
                   ></textarea>
                 </div>
-                {/* <img src={""} class="card-img-top" alt="..."></img> */}
               </div>
               <div className="buttonedit">
                 <button

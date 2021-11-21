@@ -3,7 +3,6 @@ import http from "../../services/http";
 import "../../App.css";
 import logo from "../../logo1.svg";
 import { NavLink } from "react-router-dom";
-import CommentsArray from "../../example/commentsArray";
 import { AiOutlineHome } from "react-icons/ai";
 import { MdPostAdd } from "react-icons/md";
 import { BsChatDots } from "react-icons/bs";
@@ -12,12 +11,10 @@ import { BiLogOutCircle } from "react-icons/bi";
 import { GiArchiveRegister } from "react-icons/gi";
 const Header = ({ user }) => {
   let [founded, setFounded] = useState(false);
-  let [searchValue, setSearchValue] = useState("");
+  let [posts, setPosts] = useState([]);
 
   let search = (searchValue) => {};
-
   async function logout() {
-    // return await http.post("http://localhost:5000/users/logout");
     localStorage.removeItem("userDetails");
     localStorage.removeItem("token");
   }
@@ -28,17 +25,16 @@ const Header = ({ user }) => {
   let userOnline;
   useEffect(() => {
     setUserDetails(JSON.parse(localStorage.getItem("userDetails")));
-    console.log("/////////////////////", userDetails);
-    // setUserDetails("ssdass");
-    console.log("userdetails in useEffect", userDetails);
-    console.log("userdetails in storage", localStorage.getItem("userDetails"));
+
     async function getOnlineUser() {
       userOnline = await http.get("http://localhost:5000/users");
-      console.log(userOnline);
-      return setUser(userOnline.data);
+      setUser(userOnline.data);
+      return;
     }
-    console.log(setUser);
+
     getOnlineUser();
+    let allPosts = JSON.parse(localStorage.getItem("allPosts"));
+    setPosts(allPosts);
   }, []);
 
   return (
@@ -67,9 +63,6 @@ const Header = ({ user }) => {
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               {user ? (
                 <li class="nav-item">
-                  {/* <a class="nav-link active" aria-current="page" href="/about">
-                  About
-                </a> */}
                   <NavLink className="nav-link active" to="/newPost">
                     <MdPostAdd> </MdPostAdd>יצירת פוסט
                   </NavLink>
@@ -88,21 +81,6 @@ const Header = ({ user }) => {
               ) : null}
             </ul>
 
-            <form
-              class="d-flex "
-              // style={{ background: founded ? "green" : "red" }}
-            >
-              <input
-                className="search"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                onChange={(e) => {
-                  setSearchValue(e.target.value);
-                  search(searchValue);
-                }}
-              ></input>
-            </form>
             {user ? (
               <a
                 onClick={() => logout()}
@@ -136,6 +114,3 @@ const Header = ({ user }) => {
 };
 
 export default Header;
-
-/* <h6>תאריך היעד: {this.props.appDate}</h6>
-<h2 className="fotter">:כמה ימים נותרו</h2> */

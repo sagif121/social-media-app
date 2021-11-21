@@ -7,40 +7,95 @@ import Posts from "../../example/posts";
 import http from "../../services/http";
 import News from "../news/news";
 import AppMessage from "../chat/AppMessage";
+import { FcSearch } from "react-icons/fc";
+import { BsFillAlarmFill } from "react-icons/bs";
+
 const Home = () => {
   const [allPosts, setAllPosts] = useState([]);
-  // useEffect(() => {
-  //   console.log("hello");
-  // }, []);
-
-  // let http = "http://localhost:5000/posts";
+  const [foundedPostsState, setFoundedPostsState] = useState([]);
+  const [nothingFounded, setNothingFounded] = useState();
+  let [searchValue, setSearchValue] = useState("");
+  let [searchMode, setSearchMode] = useState(false);
 
   useEffect(() => {
     async function dataPosta() {
       let data = await http.get("http://localhost:5000/posts");
-      console.log(data);
-      return setAllPosts(data.data.reverse());
+
+      setAllPosts(data.data.reverse());
+
+      return;
     }
     dataPosta();
   }, []);
 
-  console.log("all", allPosts);
+  let searchPosts = (textForSearch) => {
+    setSearchMode(true);
+    let foundedPosts = [];
+    if (textForSearch === "") {
+      setFoundedPostsState(allPosts);
+    }
+    allPosts.map((post) => {
+      if (post.content.includes(textForSearch)) {
+        foundedPosts.push(post);
+      } else {
+      }
+    });
+    setFoundedPostsState(foundedPosts);
+    if (!foundedPostsState.length > 0) {
+      setNothingFounded(true);
+    }
+  };
+  let reloadAll = () => {
+    setSearchMode(false);
+    setNothingFounded(false);
+  };
 
-  // console.log("data", JSON.parse(localStorage.getItem("userDetails")));
   return (
-    <div className="homePage">
-      <News></News>
+    <>
+      <div class="input-group">
+        <div class="form-outline">
+          <input
+            placeholder="search"
+            type="search"
+            id="form1"
+            class="form-control"
+            className="searchinput"
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+            }}
+          />
+          <label class="form-label" for="form1"></label>
+        </div>
+        <button
+          type="button"
+          class="btn searchbutton "
+          onClick={() => {
+            searchPosts(searchValue);
+          }}
+        >
+          <FcSearch></FcSearch>
+        </button>
+      </div>
 
-      {allPosts.map((postDetails) => {
-        return <Post postDetails={postDetails} />;
-      })}
-      {/* <div className="calndertop">
-        <iframe
-          className="calender"
-          src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23A79B8E&ctz=Asia%2FJerusalem&showTitle=0&showNav=1&showPrint=0&showTabs=0&showCalendars=0&showTz=1&showDate=1&src=bjRsZmczcGF2YTk2N2UyYXZqMXI2ZTk1dWdAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=aXcuamV3aXNoI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23F4511E&color=%230B8043"
-        ></iframe>
-      </div> */}
-    </div>
+      <div className="homePage">
+        <News></News>
+        {nothingFounded && (
+          <div>
+            <div>OOps nothing was Founded</div>
+            <button onClick={reloadAll}>Reload all posts</button>
+          </div>
+        )}
+        {!searchMode &&
+          allPosts.map((postDetails) => {
+            return <Post postDetails={postDetails} />;
+          })}
+        {searchMode &&
+          foundedPostsState.length > 0 &&
+          foundedPostsState.map((postDetails) => {
+            return <Post postDetails={postDetails} />;
+          })}
+      </div>
+    </>
   );
 };
 export default Home;

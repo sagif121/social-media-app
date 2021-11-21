@@ -44,6 +44,17 @@
 /* .head {
   color: rgb(128, 0, 255);
 } */
+
+.searchbutton {
+  margin-left: -80px;
+  background-color: white;
+  border: none;
+}
+
+.search {
+  margin-top: -50px;
+}
+
 .checkButton {
   background-color: red;
 }
@@ -331,4 +342,19 @@ path {
   font-family: inherit;
   font-weight: bold;
   color: gray;
+}
+
+.searchinput {
+  resize: none;
+  background-color: rgb(238, 171, 151);
+  margin-top: 10%;
+  margin-left: 360%;
+  border: 1px solid rgb(238, 171, 151);
+}
+
+.searchbutton {
+  background-color: rgb(238, 171, 151);
+  height: 20%;
+  left: 33.5%;
+  margin-top: 0.8%;
 }

@@ -18,7 +18,6 @@ import socketIOClient from "socket.io-client";
 import AppMessage from "./component/chat/AppMessage";
 import CreatMassage from "./component/chat/CreateMessage";
 import http from "./services/http";
-import AppCamera from "./component/camera/Appcamera";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
