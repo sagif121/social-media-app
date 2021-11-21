@@ -6,9 +6,10 @@ import Login from "../login/login";
 import Posts from "../../example/posts";
 import http from "../../services/http";
 import News from "../news/news";
-import AppMessage from "../chat/AppMessage";
+import { BsChatDots } from "react-icons/bs";
 import { FcSearch } from "react-icons/fc";
 import { BsFillAlarmFill } from "react-icons/bs";
+import AppMessage from "../chat/AppMessage";
 
 const Home = () => {
   const [allPosts, setAllPosts] = useState([]);
@@ -16,6 +17,7 @@ const Home = () => {
   const [nothingFounded, setNothingFounded] = useState();
   let [searchValue, setSearchValue] = useState("");
   let [searchMode, setSearchMode] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
 
   useEffect(() => {
     async function dataPosta() {
@@ -66,6 +68,7 @@ const Home = () => {
           />
           <label class="form-label" for="form1"></label>
         </div>
+
         <button
           type="button"
           class="btn searchbutton "
@@ -76,6 +79,23 @@ const Home = () => {
           <FcSearch></FcSearch>
         </button>
       </div>
+      <div className="chathome">
+        <button
+          className="buttonchat"
+          onClick={() => {
+            setChatOpen(!chatOpen);
+          }}
+        >
+          צאט
+          <BsChatDots></BsChatDots>
+        </button>
+        {!chatOpen && (
+          <div className="chatwin">
+            <AppMessage />
+          </div>
+        )}
+      </div>
+      {/* <button onClick={setChatOpen(chatOpen)}> Open chat</button> */}
 
       <div className="homePage">
         <News></News>

@@ -358,3 +358,20 @@ path {
   left: 33.5%;
   margin-top: 0.8%;
 }
+
+.chatwin {
+  width: 350px;
+  position: absolute;
+  margin-left: 70%;
+  margin-top: 5%;
+  position: fixed;
+}
+
+.buttonchat {
+  margin-left: 90%;
+  position: fixed;
+  width: 5%;
+  height: 15%;
+  border: none;
+  background-color: rgb(238, 171, 151);
+}
