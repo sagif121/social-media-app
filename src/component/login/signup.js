@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { useState } from "react";
 import "../../App.css";
 import logo from "../../logo1.svg";
@@ -28,30 +27,21 @@ const Signup = () => {
       setUserValidatedState(true);
       userValidated = true;
     }
-    console.log("function to serverbbb");
-    console.log("function to serverbbb");
-    console.log("function to serverbbb");
 
     if (userValidated) {
-      console.log("after validate");
       let res = await fetch("http://localhost:5000/users/newUser", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userDetails),
       });
 
-      console.log("res", res);
       if (res.status === 400) {
         setUserAlreadyExists(true);
 
         console.log("userAlreadyExists");
       } else if (res.status === 200) {
-        // console.log("All went as well");
         window.location = "/";
       }
-
-      // }
-      // console.log("response.status", response.status);
     } else {
       setUserFailedSignUp(true);
     }
@@ -97,7 +87,7 @@ const Signup = () => {
           <input
             onChange={(e) => {
               setUserDetails({ ...userDetails, firstName: e.target.value });
-              // console.log(firstName);
+
               if (userDetails.firstName.length > 0) {
                 setFirstNameError(false);
               }
@@ -181,23 +171,6 @@ const Signup = () => {
             </span>
           )}
           <div id="password" class="form-text"></div>
-        </div>
-        <div class="mb-3">
-          <label htmlFor="password" class="form-label">
-            image
-          </label>
-          <input
-            onChange={(e) => {
-              setUserDetails({ ...userDetails, image: e.target.value });
-            }}
-            class="form-control"
-            id="exampleNickname1"
-            placeholder="Insert Nick name"
-            aria-describedby="nickname"
-            type="file"
-            dir="ltr"
-          />
-          <div id="emailHelp" class="form-text"></div>
         </div>
 
         <button onClick={newUser} class="btn btn-primary">

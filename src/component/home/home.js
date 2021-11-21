@@ -1,14 +1,10 @@
 import React, { Component, useState, useEffect } from "react";
 import "../../App.css";
 import Post from "../post/post";
-import Signup from "../login/signup";
-import Login from "../login/login";
-import Posts from "../../example/posts";
 import http from "../../services/http";
 import News from "../news/news";
 import { BsChatDots } from "react-icons/bs";
 import { FcSearch } from "react-icons/fc";
-import { BsFillAlarmFill } from "react-icons/bs";
 import AppMessage from "../chat/AppMessage";
 
 const Home = () => {
@@ -95,7 +91,6 @@ const Home = () => {
           </div>
         )}
       </div>
-      {/* <button onClick={setChatOpen(chatOpen)}> Open chat</button> */}
 
       <div className="homePage">
         <News></News>

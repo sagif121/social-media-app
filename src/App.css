@@ -1,50 +1,3 @@
-/* .App {
-  text-align: center;
-}
-
-.App {
-  text-align: center;
-}
-
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  } */
-
-/* .head {
-  color: rgb(128, 0, 255);
-} */
-
 .searchbutton {
   margin-left: -80px;
   background-color: white;
@@ -69,7 +22,7 @@
   line-height: 100px;
   text-align: center;
 }
-@-webkit-keyframes rotating /* Safari and Chrome */ {
+@-webkit-keyframes rotating {
   from {
     -webkit-transform: rotate(0deg);
     -o-transform: rotate(0deg);
@@ -121,16 +74,11 @@
 body {
   background-color: rgb(238, 171, 151);
 }
-/* svg.homeicon {
-  height: 60px;
-} */
 
 .path {
   height: 50px;
 }
-.App {
-  /* background-image: url(bg-chat-tile-light_04fcacde539c58cca6745483d4858c52.png); */
-}
+
 .cardbodyedit {
   background-color: whitesmoke;
   height: 175px;
@@ -152,7 +100,6 @@ textarea.edit {
 }
 
 .commentbutton {
-  /* padding-right: 80%; */
   width: 100%;
 }
 
@@ -279,29 +226,18 @@ textarea.edit {
   height: 150px;
 }
 .commentsbody {
-  /* direction: rtl; */
   border: 5px solid whitesmoke;
   background: rgba(189, 75, 22, 0.651);
   color: white;
 
   border-radius: 10px;
-  /* border: 2px solid black;  */
+
   width: fit-content;
   max-width: 300px;
   height: fit-content;
   max-height: 250px;
-
-  /* margin-right: auto;
-  margin-left: auto; */
 }
-/* .thecomment {
-  background-color: whitesmoke;
-  border-radius: 15px;
-  width: auto;
-  height: auto;
-  max-height: 70px;
-  max-width: 150px;
-} */
+
 .calndertop {
   margin-top: -2900px;
   margin-left: -95px;

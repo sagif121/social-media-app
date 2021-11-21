@@ -2,44 +2,9 @@ import React, { Component, useState } from "react";
 import "../../App.css";
 import logo from "../../logo1.svg";
 import http from "../../services/http";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
-import { injectStyle } from "react-toastify/dist/inject-style";
+
 const Login = () => {
-  // let link = "http://localhost:3000/users/userInfo";
-  // let [loginDetails, setLoginDetails] = useState(link);
-  // let emailValue;
-  // let passwordValue;
-
-  // let saveValues = () => {
-  //   setLoginDetails({ email: emailValue, passowrd: passwordValue });
-  // };
-
-  // let getUser = fetch(link, { method: "GET" })
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     console.log("data", data);
-  //     localStorage.setItem("userDetails", JSON.stringify(data));
-  // setLoginDetails(data);
-  // });
-  // console.log("data from server", loginDetails);
-  // let getUser = async () => {
-  //   console.log("Start Get User ");
-  //   let response = await fetch("http://localhost:3000/users", {
-  //     method: "GET",
-  //   });
-  //   let users = await response.json();
-  //   console.log("users", users);
-  // };
-
-  // let existsUser = {
-  //   email: "sagif21@gmail.com",
-  //   passowrd: 123456,
-  // };
-
-  // const notify = () => toast("Wow so easy!");
-
   const [email, setEmail] = useState("");
   const [emailValid, setEmailValid] = useState(true);
   const [userAlreadyExists, setUserAlreadyExists] = useState(false);
@@ -51,7 +16,6 @@ const Login = () => {
   let mailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   let userExists = async () => {
-    console.log("login function");
     if (!emailValid && email.includes("@")) {
       setEmailValid(true);
     }
@@ -62,25 +26,11 @@ const Login = () => {
       }
     }
 
-    // if (!mailRegex.test(email)) {
-    //   setEmailValid(true);
-    // }
-
     if (password.length < 6) {
       setPasswordValid(true);
     } else {
       passwordValid && setPasswordValid(false);
     }
-
-    // var reges =
-
-    //   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    // var res = reges.test(email);
-    // const passVal = document.getElementById("exampleInputPassword1");
-
-    // if (passVal.value < 5) {
-    console.log("login function 2");
 
     let login = await http
       .post("http://localhost:5000/users/login", {
@@ -89,38 +39,19 @@ const Login = () => {
       })
       .then((response) => {
         if (response.status === 217) {
-          console.log("userExsits");
-          console.log(response.data);
           setUserAlreadyExists(true);
           setIncorrect(false);
         } else if (response.status === 200) {
-          console.log("All went as well");
           localStorage.setItem("userDetails", JSON.stringify(response.data));
           let userDetails = localStorage.getItem("userDetails");
-          console.log("userDetails", userDetails);
           window.location = "/";
         } else if (response.status === 212) {
           setUserAlreadyExists(false);
           setIncorrect(true);
         }
       });
-    console.log("login function 3");
 
     return login;
-    // } else {
-    //   alert("email or password not valid");
-    // }
-
-    // fetch("http://localhost:3000/users/login", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ email, password }),
-    // }).then((response) => {
-    //   if (response.status === "401") {
-    //     return console.log(response);
-    //   }
-    //   window.location = "/";
-    // });
   };
   let handleSubmit = (e) => {
     e.preventDefault();
@@ -145,7 +76,7 @@ const Login = () => {
           <label for="exampleInputEmail1" class="form-label">
             Email address
           </label>
-          {/* {!emailValid && <h4> Your Email Is not valid</h4>} */}
+
           <input
             type="text"
             class="form-control"
@@ -193,8 +124,7 @@ const Login = () => {
             </span>
           )}
         </div>
-        {/* {!emailValid ? alert("email or password is not valide") : null} */}
-        {/* {passwordValid ? alert("email or password is not valide") : null} */}
+
         <button onClick={userExists} class="btn btn-primary">
           Sign in
         </button>

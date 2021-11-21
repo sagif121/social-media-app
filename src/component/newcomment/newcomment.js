@@ -1,9 +1,7 @@
 import React, { Component, useState } from "react";
-import { NavLink } from "react-router-dom";
+
 import "../../App.css";
-import CommentsArray from "../../example/commentsArray";
-import Comments from "../comments/comments";
-import http from "../../services/http";
+
 const NewComments = ({ idPost }) => {
   const [newCommentValue, setNewCommentValue] = useState({
     comments: [{ commentContent: "" }],

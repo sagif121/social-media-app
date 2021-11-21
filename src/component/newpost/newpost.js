@@ -1,8 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../App.css";
-import CommentsArray from "../../example/commentsArray";
-import About from "../about/about";
 import http from "../../services/http";
 const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
   let [userDetails, setUserDetails] = useState("");

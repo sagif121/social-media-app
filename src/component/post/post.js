@@ -1,13 +1,12 @@
 import React, { Component, useState, useEffect } from "react";
 import "../../App.css";
-import logo from "../../logo1.svg";
+
 import Comments from "../comments/comments";
-import CommentsArray from "../../example/commentsArray";
+
 import { Link } from "react-router-dom";
 import NewComments from "../newcomment/newcomment";
 import http from "../../services/http";
-import News from "../news/news";
-// import { AiFillLike } from "@react-icons/all-files/fa/AiFillLike";
+
 import { AiFillLike } from "react-icons/ai";
 
 const Post = ({ postDetails }) => {
