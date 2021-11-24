@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../App.css";
 import http from "../../services/http";
@@ -51,7 +51,7 @@ const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
       <div className="headerpost">
         <Link to="/">
           <button className="exiteditpost">
-            <i class="fa fa-close"></i>
+            <i className="fa fa-close"></i>
           </button>
         </Link>
         <h1>יצירת פוסט</h1>

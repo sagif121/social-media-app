@@ -1,11 +1,9 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../../App.css";
 import Post from "../post/post";
 import http from "../../services/http";
 import News from "../news/news";
-import { BsChatDots } from "react-icons/bs";
 import { FcSearch } from "react-icons/fc";
-import AppMessage from "../chat/AppMessage";
 
 const Home = () => {
   const [allPosts, setAllPosts] = useState([]);
@@ -13,7 +11,6 @@ const Home = () => {
   const [nothingFounded, setNothingFounded] = useState();
   let [searchValue, setSearchValue] = useState("");
   let [searchMode, setSearchMode] = useState(false);
-  const [chatOpen, setChatOpen] = useState(false);
 
   useEffect(() => {
     async function dataPosta() {
@@ -50,46 +47,29 @@ const Home = () => {
 
   return (
     <>
-      <div class="input-group">
-        <div class="form-outline">
+      <div className="input-group">
+        <div className="form-outline">
           <input
             placeholder="search"
             type="search"
             id="form1"
-            class="form-control"
+            className="form-control"
             className="searchinput"
             onChange={(e) => {
               setSearchValue(e.target.value);
             }}
           />
-          <label class="form-label" for="form1"></label>
         </div>
 
         <button
           type="button"
-          class="btn searchbutton "
+          className="btn searchbutton "
           onClick={() => {
             searchPosts(searchValue);
           }}
         >
           <FcSearch></FcSearch>
         </button>
-      </div>
-      <div className="chathome">
-        <button
-          className="buttonchat"
-          onClick={() => {
-            setChatOpen(!chatOpen);
-          }}
-        >
-          צאט
-          <BsChatDots></BsChatDots>
-        </button>
-        {!chatOpen && (
-          <div className="chatwin">
-            <AppMessage />
-          </div>
-        )}
       </div>
 
       <div className="homePage">
@@ -102,12 +82,13 @@ const Home = () => {
         )}
         {!searchMode &&
           allPosts.map((postDetails) => {
-            return <Post postDetails={postDetails} />;
+            return <Post key={postDetails.content} postDetails={postDetails} />;
           })}
         {searchMode &&
           foundedPostsState.length > 0 &&
           foundedPostsState.map((postDetails) => {
-            return <Post postDetails={postDetails} />;
+            <li key={postDetails.content}></li>;
+            return <Post key={postDetails.content} postDetails={postDetails} />;
           })}
       </div>
     </>

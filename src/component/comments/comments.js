@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React from "react";
 import "../../App.css";
 
 const Comments = ({ commentsDetails }) => {

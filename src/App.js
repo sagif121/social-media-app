@@ -1,25 +1,19 @@
-import React, { Component, useState, useEffect } from "react";
-import logo from "./logo.svg";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import { render } from "react-dom";
+
 import Header from "./component/header/header";
-import Fotter from "./component/about/about";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import About from "./component/about/about";
 import Home from "./component/home/home";
 import Login from "../src/component/login/login";
 import Signup from "../src/component/login/signup";
-import Newpost from "./component/newpost/newpost";
-import newComments from "./component/newcomment/newcomment";
+
 import Edit from "./component/editpost/edit";
-import News from "./component/news/news";
-import Messages from "./component/chat/Messages";
-import socketIOClient from "socket.io-client";
+
 import AppMessage from "./component/chat/AppMessage";
 import CreatMassage from "./component/chat/CreateMessage";
-import http from "./services/http";
 
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 const App = () => {
@@ -27,14 +21,6 @@ const App = () => {
   useEffect(() => {
     let userDetails = localStorage.getItem("userDetails");
     setUser(userDetails);
-    // async function getOnlineUser() {
-    //   let userOnline = await http.get("http://localhost:5000/users");
-    //   console.log("userDetails", userOnline.data);
-    //   localStorage.setItem("userDetails", JSON.stringify(userOnline.data));
-    //   return setUser(userOnline.data);
-    // }
-
-    // getOnlineUser();
   }, []);
 
   return (

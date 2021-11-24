@@ -42,7 +42,7 @@ function AppMessage() {
     <div className="AppMessage">
       <Link to="/">
         <button className="exitechat">
-          <i class="fa fa-close"></i>
+          <i className="fa fa-close"></i>
         </button>
       </Link>
       <div>

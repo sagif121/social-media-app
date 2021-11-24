@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import "../../App.css";
 import logo from "../../logo1.svg";
 import http from "../../services/http";
@@ -12,8 +12,6 @@ const Login = () => {
 
   const [password, setPassword] = useState(true);
   const [passwordValid, setPasswordValid] = useState(false);
-
-  let mailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   let userExists = async () => {
     if (!emailValid && email.includes("@")) {
@@ -72,14 +70,14 @@ const Login = () => {
           handleSubmit(e);
         }}
       >
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
           </label>
 
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="exampleInputEmail1"
             placeholder="Insert Email"
             aria-describedby="emailHelp"
@@ -102,13 +100,13 @@ const Login = () => {
           )}
         </div>
 
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="exampleInputPassword1" className="form-label">
             Password
           </label>
           <input
             type="password"
-            class="form-control"
+            className="form-control"
             placeholder="Insert Password"
             id="exampleInputPassword1"
             onChange={(e) => {
@@ -125,7 +123,7 @@ const Login = () => {
           )}
         </div>
 
-        <button onClick={userExists} class="btn btn-primary">
+        <button onClick={userExists} className="btn btn-primary">
           Sign in
         </button>
       </form>

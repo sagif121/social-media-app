@@ -1,18 +1,14 @@
-import React, { Component, useState, useEffect } from "react";
-import { useParams, Redirect, useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import "../../App.css";
 
 import http from "../../services/http";
 
 const Edit = () => {
-  let history = useHistory();
   const [postDetails, setPostDetails] = useState("empty");
-  let { createdBy, content, dateCreated, image, likes, _id, comments } =
-    postDetails;
+  let { createdBy, content, dateCreated } = postDetails;
   let { postId } = useParams();
-
-  const [deletePost, setdelPost] = useState(_id);
 
   const [user, setUser] = useState({});
   useEffect(() => {
@@ -88,14 +84,14 @@ const Edit = () => {
                 <button
                   onClick={() => handlEditComment(postId)}
                   type="button"
-                  class="btn btn-outline-primary "
+                  className="btn btn-outline-primary "
                 >
                   פרסם
                 </button>
                 <button
                   onClick={() => handlDeelComment(postId)}
                   type="button"
-                  class="btn btn-outline-primary "
+                  className="btn btn-outline-primary "
                 >
                   מחק
                 </button>

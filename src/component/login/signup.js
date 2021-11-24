@@ -78,9 +78,9 @@ const Signup = () => {
           </h1>
         </div>
       </div>
-      <div className="signupform" Validate="validate">
-        <div class="mb-3">
-          <label htmlFor="firstName" class="form-label">
+      <div className="signupform">
+        <div className="mb-3">
+          <label htmlFor="firstName" className="form-label">
             firstName
           </label>
 
@@ -93,7 +93,7 @@ const Signup = () => {
               }
             }}
             type="text"
-            class="form-control"
+            className="form-control"
             id="firstName"
             placeholder="Insert First Name"
             aria-describedby="firstName"
@@ -101,10 +101,10 @@ const Signup = () => {
           {firstNameError && userFailedSignUp && (
             <span style={{ color: "red" }}>Please insert full first name</span>
           )}
-          <div id="firstName" class="form-text"></div>
+          <div id="firstName" className="form-text"></div>
         </div>
-        <div class="mb-3">
-          <label htmlFor="Last name" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="Last name" className="form-label">
             lastName
           </label>
           <input
@@ -115,7 +115,7 @@ const Signup = () => {
               }
             }}
             type="text"
-            class="form-control"
+            className="form-control"
             id="Last name"
             placeholder="Insert Last name"
             aria-describedby="Last name"
@@ -123,18 +123,18 @@ const Signup = () => {
           {lastNameError && userFailedSignUp && (
             <span style={{ color: "red" }}>Please insert full last name</span>
           )}
-          <div id="Last name" class="form-text"></div>
+          <div id="Last name" className="form-text"></div>
         </div>
-        <div class="mb-3">
-          <label htmlFor="Email" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="Email" className="form-label">
             Email address
           </label>
           <input
             onChange={(e) => {
               setUserDetails({ ...userDetails, email: e.target.value });
             }}
-            type="email"
-            class="form-control"
+            // type="email"
+            className="form-control"
             id="Email"
             placeholder="Insert Email"
             aria-describedby="Email"
@@ -147,10 +147,10 @@ const Signup = () => {
           {userAlreadyExists && (
             <span style={{ color: "red" }}>User already Exists</span>
           )}
-          <div id="Email" class="form-text"></div>
+          <div id="Email" className="form-text"></div>
         </div>
-        <div class="mb-3">
-          <label htmlFor="password" class="form-label">
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
             Password
           </label>
           <input
@@ -161,7 +161,7 @@ const Signup = () => {
               }
             }}
             type="password"
-            class="form-control"
+            className="form-control"
             placeholder="Insert Password"
             id="password"
           />
@@ -170,10 +170,10 @@ const Signup = () => {
               Your password should have at least 6 characters
             </span>
           )}
-          <div id="password" class="form-text"></div>
+          <div id="password" className="form-text"></div>
         </div>
 
-        <button onClick={newUser} class="btn btn-primary">
+        <button onClick={newUser} className="btn btn-primary">
           Submit
         </button>
       </div>

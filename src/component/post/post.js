@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../../App.css";
 
 import Comments from "../comments/comments";
@@ -10,20 +10,10 @@ import http from "../../services/http";
 import { AiFillLike } from "react-icons/ai";
 
 const Post = ({ postDetails }) => {
-  const {
-    createdBy,
-    content,
-    dateCreated,
-    image,
-    likes,
-    _id,
-    comments,
-    userId,
-  } = postDetails;
+  const { createdBy, content, dateCreated, likes, _id, comments, userId } =
+    postDetails;
   let [newCommentsArray, setNewCommentsArray] = useState([]);
-  let commentLoaded = false;
-  let x = ["s", "s", "s", "s", "s", "s", "s", "s"];
-  var currentDate = new Date(dateCreated);
+
   let y = new Date(parseInt(dateCreated)).toString();
   let dateFinal = y.slice(4, 21);
 
@@ -62,10 +52,10 @@ const Post = ({ postDetails }) => {
 
   return (
     <div dir="rtl">
-      <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div className="row row-cols-1 row-cols-md-3 g-4">
         <span></span>
 
-        <div class="col">
+        <div className="col">
           <div className="card h-80">
             <div>
               {user?._id === userId ? (
@@ -81,12 +71,12 @@ const Post = ({ postDetails }) => {
             </div>
             <br />
 
-            <div class="card-body">
+            <div className="card-body">
               <div className="cardbody">
-                <h5 class="card-title"> {createdBy} </h5>
-                <small class="text-muted">{dateFinal}</small>
+                <h5 className="card-title"> {createdBy} </h5>
+                <small className="text-muted">{dateFinal}</small>
                 <p></p>
-                <p className="postcontent" class="card-text">
+                <p className="postcontent" className="card-text">
                   {content}
                 </p>
               </div>
@@ -94,7 +84,9 @@ const Post = ({ postDetails }) => {
               <div className="comments">
                 {comments.length > 0 &&
                   comments.map((comment) => {
-                    return <Comments commentsDetails={comment} />;
+                    return (
+                      <Comments key={comment._id} commentsDetails={comment} />
+                    );
                   })}
               </div>
             </div>
@@ -108,7 +100,7 @@ const Post = ({ postDetails }) => {
               <button
                 disabled={likes.some((like) => postDetails.likedBy === userId)}
                 type="button"
-                class="btn btn-outline-primary "
+                className="btn btn-outline-primary "
                 onClick={handleLike}
               >
                 like

@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import http from "../../services/http";
 import "../../App.css";
 import logo from "../../logo1.svg";
@@ -10,10 +10,8 @@ import { BiLogInCircle } from "react-icons/bi";
 import { BiLogOutCircle } from "react-icons/bi";
 import { GiArchiveRegister } from "react-icons/gi";
 const Header = ({ user }) => {
-  let [founded, setFounded] = useState(false);
   let [posts, setPosts] = useState([]);
 
-  let search = (searchValue) => {};
   async function logout() {
     localStorage.removeItem("userDetails");
     localStorage.removeItem("token");
@@ -32,24 +30,24 @@ const Header = ({ user }) => {
       return;
     }
 
-    getOnlineUser();
+    getOnlineUser(posts);
     let allPosts = JSON.parse(localStorage.getItem("allPosts"));
     setPosts(allPosts);
   }, []);
 
   return (
     <div className="head">
-      <nav class="navbar navbar-expand-lg navbar-light ">
-        <div class="container-fluid">
+      <nav className="navbar navbar-expand-lg navbar-light ">
+        <div className="container-fluid">
           <NavLink className="nav-link" to="/" activeClassName="active">
-            <a class="navbar-brand" href="/">
-              <span className="homeicon">
-                <AiOutlineHome></AiOutlineHome>
-              </span>
-            </a>
+            {/* <a class="navbar-brand" href="/">
+              <span className="homeicon"> */}
+            <AiOutlineHome></AiOutlineHome>
+            {/* </span> */}
+            {/* </a> */}
           </NavLink>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -57,21 +55,21 @@ const Header = ({ user }) => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {user ? (
-                <li class="nav-item">
+                <li className="nav-item">
                   <NavLink className="nav-link active" to="/newPost">
                     <MdPostAdd> </MdPostAdd>יצירת פוסט
                   </NavLink>
                 </li>
               ) : null}
               {user ? (
-                <li class="nav-item">
+                <li className="nav-item">
                   <a
-                    class="nav-link active"
+                    className="nav-link active"
                     aria-current="page"
                     href="/AppMessage"
                   >
@@ -84,7 +82,7 @@ const Header = ({ user }) => {
             {user ? (
               <a
                 onClick={() => logout()}
-                class="navbar-brand"
+                className="navbar-brand"
                 aria-current="page"
                 href="/login/login"
               >
@@ -92,18 +90,26 @@ const Header = ({ user }) => {
                 {userDetails && "Logout" + " " + " " + userDetails.firstName}
               </a>
             ) : (
-              <a class="navbar-brand" aria-current="page" href="/login/login">
+              <a
+                className="navbar-brand"
+                aria-current="page"
+                href="/login/login"
+              >
                 <BiLogInCircle />
               </a>
             )}
 
             {user ? null : (
-              <a class="navbar-brand" aria-current="page" href="/login/signup">
+              <a
+                className="navbar-brand"
+                aria-current="page"
+                href="/login/signup"
+              >
                 <GiArchiveRegister></GiArchiveRegister>
               </a>
             )}
 
-            <a class="navbar-brand" href="/">
+            <a className="navbar-brand" href="/">
               <img className="logo" src={logo} alt="logo" />
             </a>
           </div>
