@@ -23,16 +23,19 @@ const Header = ({ user }) => {
   let userOnline;
   useEffect(() => {
     setUserDetails(JSON.parse(localStorage.getItem("userDetails")));
+    try {
+      async function getOnlineUser() {
+        userOnline = await http.get("http://localhost:5000/users");
+        setUser(userOnline.data);
+        return;
+      }
 
-    async function getOnlineUser() {
-      userOnline = await http.get("http://localhost:5000/users");
-      setUser(userOnline.data);
-      return;
+      getOnlineUser(posts);
+      let allPosts = JSON.parse(localStorage.getItem("allPosts"));
+      setPosts(allPosts);
+    } catch (err) {
+      console.log(err);
     }
-
-    getOnlineUser(posts);
-    let allPosts = JSON.parse(localStorage.getItem("allPosts"));
-    setPosts(allPosts);
   }, []);
 
   return (
@@ -40,11 +43,7 @@ const Header = ({ user }) => {
       <nav className="navbar navbar-expand-lg navbar-light ">
         <div className="container-fluid">
           <NavLink className="nav-link" to="/" activeClassName="active">
-            {/* <a class="navbar-brand" href="/">
-              <span className="homeicon"> */}
             <AiOutlineHome></AiOutlineHome>
-            {/* </span> */}
-            {/* </a> */}
           </NavLink>
           <button
             className="navbar-toggler"

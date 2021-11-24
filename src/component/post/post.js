@@ -13,25 +13,33 @@ const Post = ({ postDetails }) => {
   const { createdBy, content, dateCreated, likes, _id, comments, userId } =
     postDetails;
   let [newCommentsArray, setNewCommentsArray] = useState([]);
+  const [allComments, setAllComments] = useState([]);
+  let pushNewComment = (newComment) => {
+    console.log("push", newComment);
+    setAllComments([...allComments, newComment]);
+  };
 
   let y = new Date(parseInt(dateCreated)).toString();
   let dateFinal = y.slice(4, 21);
 
   let handleLike = async () => {
     let userIdForLike = JSON.parse(localStorage.getItem("userDetails"))._id;
-
-    fetch("http://localhost:5000/posts/newLike/" + _id, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ likedBy: userIdForLike }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message === "Already liked") {
-        } else if (data.message === "like saved") {
-          setLocalLikes([...localLikes, { likesBy: userIdForLike }]);
-        }
-      });
+    try {
+      fetch("http://localhost:5000/posts/newLike/" + _id, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ likedBy: userIdForLike }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.message === "Already liked") {
+          } else if (data.message === "like saved") {
+            setLocalLikes([...localLikes, { likesBy: userIdForLike }]);
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
   useState(() => {
     setNewCommentsArray(comments);
@@ -39,6 +47,9 @@ const Post = ({ postDetails }) => {
 
   const [user, setUser] = useState({});
   useEffect(() => {
+    if (comments) {
+      setAllComments(comments);
+    }
     async function getOnlineUser() {
       let userOnline = await http.get("http://localhost:5000/users");
 
@@ -49,7 +60,7 @@ const Post = ({ postDetails }) => {
   }, []);
 
   let [localLikes, setLocalLikes] = useState(likes);
-
+  console.log("user._id", user._id);
   return (
     <div dir="rtl">
       <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -82,11 +93,9 @@ const Post = ({ postDetails }) => {
               </div>
               <hr className="h1card" />
               <div className="comments">
-                {comments.length > 0 &&
-                  comments.map((comment) => {
-                    return (
-                      <Comments key={comment._id} commentsDetails={comment} />
-                    );
+                {allComments.length > 0 &&
+                  allComments.map((comment, index) => {
+                    return <Comments key={index} commentsDetails={comment} />;
                   })}
               </div>
             </div>
@@ -105,7 +114,12 @@ const Post = ({ postDetails }) => {
               >
                 like
               </button>
-              <NewComments idPost={_id} />
+              <NewComments
+                idPost={_id}
+                pushNewComment={(newComment) => {
+                  pushNewComment(newComment);
+                }}
+              />
             </div>
           </div>
         </div>

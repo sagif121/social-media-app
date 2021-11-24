@@ -19,13 +19,17 @@ function AppMessage() {
 
   const [firstName, setUser] = useState({});
   useEffect(() => {
-    async function getUserName() {
-      let userName = await http.get("http://localhost:5000/users");
+    try {
+      async function getUserName() {
+        let userName = await http.get("http://localhost:5000/users");
 
-      return setUser(userName.data.firstName);
+        return setUser(userName.data.firstName);
+      }
+
+      getUserName();
+    } catch (err) {
+      console.log("error", err);
     }
-
-    getUserName();
   }, []);
 
   const sendMessage = (e) => {
@@ -48,6 +52,7 @@ function AppMessage() {
       <div>
         <h1> {"hello   " + firstName} </h1>
         {chat.map((payload, index) => {
+          console.log("payload", index);
           return (
             <div
               className={

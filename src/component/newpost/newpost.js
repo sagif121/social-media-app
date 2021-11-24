@@ -18,15 +18,17 @@ const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
       dateUpdated: Date.now(),
       createdBy: userDetails._id,
     });
-    const newPost = await http
-      .post("http://localhost:5000/posts/newPost", newPostObject)
-      .then((response) => {
-        if (response) {
-          window.location = "/";
-        }
-      });
-
-    return newPost;
+    try {
+      const newPost = await http
+        .post("http://localhost:5000/posts/newPost", newPostObject)
+        .then((response) => {
+          if (response) {
+            window.location = "/";
+          }
+        });
+    } catch (err) {
+      console.log("error", err);
+    }
   };
 
   const [user, setUser] = useState({});

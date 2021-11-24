@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { Component, useState, useEffect } from "react";
 import "../../App.css";
 import Post from "../post/post";
 import http from "../../services/http";
 import News from "../news/news";
+import { BsChatDots } from "react-icons/bs";
 import { FcSearch } from "react-icons/fc";
+import AppMessage from "../chat/AppMessage";
 
 const Home = () => {
   const [allPosts, setAllPosts] = useState([]);
@@ -11,14 +13,24 @@ const Home = () => {
   const [nothingFounded, setNothingFounded] = useState();
   let [searchValue, setSearchValue] = useState("");
   let [searchMode, setSearchMode] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [userDetails, setUserDetails] = useState(false);
 
   useEffect(() => {
+    let userDetailsFromLocal = JSON.parse(localStorage.getItem("userDetails"));
+    if (userDetailsFromLocal) {
+      setUserDetails(userDetailsFromLocal);
+    }
+    console.log(userDetails);
     async function dataPosta() {
-      let data = await http.get("http://localhost:5000/posts");
-
-      setAllPosts(data.data.reverse());
-
-      return;
+      try {
+        let x = await fetch("http://localhost:5000/posts");
+        let data = await x.json();
+        console.log(data);
+        setAllPosts(data.reverse());
+      } catch (err) {
+        console.log("error catched", err);
+      }
     }
     dataPosta();
   }, []);
@@ -71,6 +83,24 @@ const Home = () => {
           <FcSearch></FcSearch>
         </button>
       </div>
+      {userDetails && (
+        <div className="chathome">
+          <button
+            className="buttonchat"
+            onClick={() => {
+              setChatOpen(!chatOpen);
+            }}
+          >
+            צאט
+            <BsChatDots></BsChatDots>
+          </button>
+          {chatOpen && (
+            <div className="chatwin">
+              <AppMessage />
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="homePage">
         <News></News>

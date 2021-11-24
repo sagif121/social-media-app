@@ -6,7 +6,7 @@ const Comments = ({ commentsDetails }) => {
 
   return (
     <div className="commentsbody" dir="rtl">
-      {commentContent} {}
+      {commentContent}
     </div>
   );
 };

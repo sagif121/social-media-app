@@ -12,12 +12,16 @@ const Edit = () => {
 
   const [user, setUser] = useState({});
   useEffect(() => {
-    async function getOnlineUser() {
-      let userOnline = await http.get("http://localhost:5000/users");
-      return setUser(userOnline.data);
-    }
+    try {
+      async function getOnlineUser() {
+        let userOnline = await http.get("http://localhost:5000/users");
+        return setUser(userOnline.data);
+      }
 
-    getOnlineUser();
+      getOnlineUser();
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   useEffect(() => {
@@ -59,17 +63,17 @@ const Edit = () => {
       {postDetails === "empty" ? (
         <h1 className="loader">Loading</h1>
       ) : (
-        <div class="row row-cols-1 row-cols-md-3 g-2">
+        <div className="row row-cols-1 row-cols-md-3 g-2">
           <span></span>
-          <div class="col">
-            <div class="card  divclass">
-              <div class="cardeditpos">
+          <div className="col">
+            <div className="card  divclass">
+              <div className="cardeditpos">
                 <div className="cardbodyedit">
-                  <h5 class="card-title">{createdBy}</h5>
-                  <small class="text-muted">{dateCreated}</small>
+                  <h5 className="card-title">{createdBy}</h5>
+                  <small className="text-muted">{dateCreated}</small>
                   <p></p>
                   <textarea
-                    class="edit"
+                    className="edit"
                     value={content}
                     onChange={(e) => {
                       setPostDetails({
