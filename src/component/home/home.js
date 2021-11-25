@@ -17,10 +17,10 @@ const Home = () => {
   const [userDetails, setUserDetails] = useState(false);
 
   let userDetail = JSON.parse(localStorage.getItem("userDetails"));
-  console.log(userDetail);
+
   useEffect(() => {
     let userDetailsFromLocal = JSON.parse(localStorage.getItem("userDetails"));
-    console.log(userDetailsFromLocal);
+
     if (userDetailsFromLocal) {
       setUserDetails(userDetailsFromLocal);
     }
@@ -29,7 +29,7 @@ const Home = () => {
       try {
         let x = await fetch("http://localhost:5000/posts");
         let data = await x.json();
-        console.log(data);
+
         setAllPosts(data.reverse());
       } catch (err) {
         console.log("error catched", err);
@@ -108,7 +108,6 @@ const Home = () => {
         <News></News>
         {nothingFounded && (
           <div>
-            {/* <div>OOps nothing was Founded</div> */}
             <button className="reload" onClick={reloadAll}>
               Reload all posts
             </button>

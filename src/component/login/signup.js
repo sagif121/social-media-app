@@ -133,7 +133,7 @@ const Signup = () => {
             onChange={(e) => {
               setUserDetails({ ...userDetails, email: e.target.value });
             }}
-            // type="email"
+            type="email"
             className="form-control"
             id="Email"
             placeholder="Insert Email"
