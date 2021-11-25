@@ -11,6 +11,7 @@ import { BiLogOutCircle } from "react-icons/bi";
 import { GiArchiveRegister } from "react-icons/gi";
 const Header = ({ user }) => {
   let [posts, setPosts] = useState([]);
+  let userDetail = JSON.parse(localStorage.getItem("userDetails"));
 
   async function logout() {
     localStorage.removeItem("userDetails");
@@ -64,6 +65,35 @@ const Header = ({ user }) => {
                     <MdPostAdd> </MdPostAdd>יצירת פוסט
                   </NavLink>
                 </li>
+              ) : null}
+
+              {!userDetail ? (
+                <div>
+                  <div className="messagenotconnect">
+                    You are not registered or logged in
+                  </div>
+                  <div className="tosignup">
+                    <a
+                      className="navbar-brand "
+                      aria-current="page"
+                      href="/login/signup"
+                    >
+                      to signup
+                      <GiArchiveRegister></GiArchiveRegister>
+                    </a>
+                  </div>
+                  <div className="tologin">
+                    <a
+                      onClick={() => logout()}
+                      className="navbar-brand "
+                      aria-current="page"
+                      href="/login/login"
+                    >
+                      to login
+                      <BiLogOutCircle></BiLogOutCircle>
+                    </a>
+                  </div>
+                </div>
               ) : null}
               {user ? (
                 <li className="nav-item">

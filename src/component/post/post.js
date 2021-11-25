@@ -45,22 +45,10 @@ const Post = ({ postDetails }) => {
     setNewCommentsArray(comments);
   }, []);
 
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    if (comments) {
-      setAllComments(comments);
-    }
-    async function getOnlineUser() {
-      let userOnline = await http.get("http://localhost:5000/users");
-
-      return setUser(userOnline.data);
-    }
-
-    getOnlineUser();
-  }, []);
+  let userDetails = JSON.parse(localStorage.getItem("userDetails"));
 
   let [localLikes, setLocalLikes] = useState(likes);
-  console.log("user._id", user._id);
+
   return (
     <div dir="rtl">
       <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -69,7 +57,7 @@ const Post = ({ postDetails }) => {
         <div className="col">
           <div className="card h-80">
             <div>
-              {user?._id === userId ? (
+              {userDetails?._id === userId ? (
                 <Link to={"/edit/" + _id}>
                   <button
                     className="btn btn-outline-primary btnedit"
@@ -106,14 +94,19 @@ const Post = ({ postDetails }) => {
                   {localLikes.length} <AiFillLike />
                 </div>
               )}
-              <button
-                disabled={likes.some((like) => postDetails.likedBy === userId)}
-                type="button"
-                className="btn btn-outline-primary "
-                onClick={handleLike}
-              >
-                like
-              </button>
+
+              {userDetails ? (
+                <button
+                  disabled={likes.some(
+                    (like) => postDetails.likedBy === userId
+                  )}
+                  type="button"
+                  className="btn btn-outline-primary "
+                  onClick={handleLike}
+                >
+                  like
+                </button>
+              ) : null}
               <NewComments
                 idPost={_id}
                 pushNewComment={(newComment) => {

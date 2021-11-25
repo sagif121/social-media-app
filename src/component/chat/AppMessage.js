@@ -52,9 +52,9 @@ function AppMessage() {
       <div>
         <h1> {"hello   " + firstName} </h1>
         {chat.map((payload, index) => {
-          console.log("payload", index);
           return (
             <div
+              key={index}
               className={
                 payload.id === userDetails._id
                   ? "bodymessageUser"

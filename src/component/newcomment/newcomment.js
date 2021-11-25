@@ -4,7 +4,7 @@ import "../../App.css";
 
 const NewComments = ({ idPost, pushNewComment }) => {
   const [newCommentValue, setNewCommentValue] = useState("");
-
+  let userDetail = JSON.parse(localStorage.getItem("userDetails"));
   const getInputValue = (event) => {
     const userValue = event.target.value;
   };
@@ -21,15 +21,13 @@ const NewComments = ({ idPost, pushNewComment }) => {
           body: JSON.stringify(commentForPost),
         }
       );
-      console.log("req", req);
+
       if (req.status === 200) {
         data = await req.json();
       }
       if (data) {
         pushNewComment({ commentContent: newCommentValue });
         setNewCommentValue("");
-        console.log("new", newCommentValue);
-        // window.location.reload();
       }
     } catch (err) {
       console.log("ddddddd", err);
@@ -37,17 +35,18 @@ const NewComments = ({ idPost, pushNewComment }) => {
   };
   return (
     <span>
-      <div>
-        <input
-          className="inputcomment"
-          placeholder="כתוב תגובה"
-          onChange={(e) => {
-            setNewCommentValue(e.target.value);
-          }}
-          value={newCommentValue}
-        ></input>
-      </div>
-
+      {userDetail ? (
+        <div>
+          <input
+            className="inputcomment"
+            placeholder="כתוב תגובה"
+            onChange={(e) => {
+              setNewCommentValue(e.target.value);
+            }}
+            value={newCommentValue}
+          ></input>
+        </div>
+      ) : null}
       {newCommentValue.length > 0 && (
         <span>
           <button

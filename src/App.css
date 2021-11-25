@@ -311,3 +311,20 @@ path {
   border: none;
   background-color: rgb(238, 171, 151);
 }
+
+.messagenotconnect {
+  color: red;
+  font-size: large;
+  font-weight: bolder;
+}
+.tosignup {
+  margin-left: 180%;
+}
+
+.tologin {
+  margin-left: 180%;
+}
+
+.reload {
+  background-color: rgb(238, 171, 151);
+}

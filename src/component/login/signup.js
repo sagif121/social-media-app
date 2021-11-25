@@ -167,7 +167,7 @@ const Signup = () => {
           />
           {passwordError && userFailedSignUp && (
             <span style={{ color: "red" }}>
-              Your password should have at least 6 characters
+              Your password should have at least 7 characters
             </span>
           )}
           <div id="password" className="form-text"></div>

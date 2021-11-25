@@ -16,12 +16,15 @@ const Home = () => {
   const [chatOpen, setChatOpen] = useState(false);
   const [userDetails, setUserDetails] = useState(false);
 
+  let userDetail = JSON.parse(localStorage.getItem("userDetails"));
+  console.log(userDetail);
   useEffect(() => {
     let userDetailsFromLocal = JSON.parse(localStorage.getItem("userDetails"));
+    console.log(userDetailsFromLocal);
     if (userDetailsFromLocal) {
       setUserDetails(userDetailsFromLocal);
     }
-    console.log(userDetails);
+
     async function dataPosta() {
       try {
         let x = await fetch("http://localhost:5000/posts");
@@ -72,7 +75,6 @@ const Home = () => {
             }}
           />
         </div>
-
         <button
           type="button"
           className="btn searchbutton "
@@ -106,10 +108,13 @@ const Home = () => {
         <News></News>
         {nothingFounded && (
           <div>
-            <div>OOps nothing was Founded</div>
-            <button onClick={reloadAll}>Reload all posts</button>
+            {/* <div>OOps nothing was Founded</div> */}
+            <button className="reload" onClick={reloadAll}>
+              Reload all posts
+            </button>
           </div>
         )}
+
         {!searchMode &&
           allPosts.map((postDetails) => {
             return <Post key={postDetails.content} postDetails={postDetails} />;
