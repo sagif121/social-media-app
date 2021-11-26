@@ -75,7 +75,7 @@ const Newpost = ({ postDetails, log, commentsArray, setMainArray }) => {
       </form>
       <div className="addtopost"></div>
       <div>
-        {newPostObject.content.length > 1 && (
+        {newPostObject.content.length > 0 && (
           <button
             className="btn btn-outline-primary buttonnewpost "
             type="button"
